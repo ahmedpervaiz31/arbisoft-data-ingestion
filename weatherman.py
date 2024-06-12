@@ -172,8 +172,8 @@ class Engine:
         # call ParseRecords on the files
         # call CreateReports on the method plus the record
         
-        # stores path
-        path = self.query[1]
+        # stores path and checks if it ends with '/' otherwise inserted
+        path = self.check_path(self.query[1])
         
         for i, word in enumerate(self.query):
             method = []
@@ -213,6 +213,12 @@ class Engine:
                                 + str(year) + "_"
                                 + month_abbr + ".txt")
 
+    def check_path(self, path):
+        size = len(path)
+        if path[size-1] != '/':
+            path += '/'
+        return path
+        
 # 6. Define main for assembling the above and running the program.
 def main():
     engine = Engine(sys.argv)
