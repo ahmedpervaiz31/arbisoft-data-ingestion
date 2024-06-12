@@ -8,7 +8,6 @@ def convert_date(date):
     day = int(parts[2])
             
     my_date = datetime.datetime(year, month, day)
-            
     month_str = my_date.strftime('%B')
             
     date = str(day) + "th " + month_str + " " + str(year)
@@ -42,10 +41,10 @@ class ParseRecords:
             for term in terms[1:]:
                 # if value then append it
                 # else append 0
-                try:
+                if term:
                     reading = int(float(term))
                     readings.append(reading)
-                except ValueError:
+                else:
                     readings.append(0)
             
             # IGNORE EMPTY READINGS 
@@ -111,6 +110,7 @@ class CreateReports:
         max_temp = self.calculate.max(1)
         min_temp = self.calculate.min(3)
         most_humid = self.calculate.max(7)
+        
         print("Max Temp: ", max_temp,
               "Min Temp: ", min_temp,
               "Most Humid: ", most_humid)
@@ -120,6 +120,7 @@ class CreateReports:
         max_avg_temp = self.calculate.max(1)
         min_avg_temp = self.calculate.min(3)
         avg_humidity = self.calculate.avg(7)
+        
         print("Max Avg Temp: ", max_avg_temp, 
               "Min Avg Temp: ", min_avg_temp, 
               "Average Humid: ", avg_humidity)
@@ -158,20 +159,15 @@ class Engine:
         
     def assemble_args(self):
         # reads and parses the agruments
+        # if query is year then generate all files for the months
+        # store the method and the path/month filename
+        # call ParseRecords on the files
+        # call CreateReports on the method plus the record
+        
         if len(self.query) < 4:
             print("Format: file path method files")
             return
 
-        #possibilities:
-# weatherman.py /path/to/files-dir -c 2011/03 -a 2011/3 -e 2011
-# weatherman.py /path/to/files-dir -a 2005/6
-# weatherman.py /path/to/files-dir -e 2002 2004
-
-# if query is year then generate all files for the months
-        # store the method alongside the month files (updated with path)
-        # call ParseRecords on the files
-        # call CreateReports on the method plus the record
-        
         # stores path and checks if it ends with '/' otherwise inserted
         path = self.check_path(self.query[1])
         
