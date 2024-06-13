@@ -1,4 +1,3 @@
-All tasks work. 
+Written code for all tasks, have to properly interpret some of the syntax issues
 
-For the bonus, the method should be '-b' an example command would be:
-weatherman.py weatherfiles -b 2005
+Have to direct command line arguments properly
