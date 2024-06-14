@@ -1,17 +1,16 @@
 import datetime
 
 # 1. Define a data structure for holding each weather reading.
-class Record:
-    def __init__ (self, date, record):
+class WeatherRecord:
+    def __init__ (self, date, reading):
         self.convert_date(date)
-        self.record = record
+        self.reading = reading
     
     def convert_date(self, date):
         parts = date.split("-")
         year = int(parts[0])
         month = int(parts[1])
         day = int(parts[2])
-                
         
         my_date = datetime.datetime(year, month, day)
         month_str = my_date.strftime('%B')
@@ -21,8 +20,8 @@ class Record:
         elif (day == 2):
             self.date = str(day) + "nd " + month_str + " " + str(year)
         elif (day == 3):
-            self.date += str(day) + "rd " + month_str + " " + str(year)
+            self.date = str(day) + "rd " + month_str + " " + str(year)
         else:
-            self.date += str(day) + "th " + month_str + " " + str(year)
+            self.date = str(day) + "th " + month_str + " " + str(year)
                 
     

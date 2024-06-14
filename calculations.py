@@ -1,31 +1,21 @@
-from parse_records import ParseRecords
-
 # 3. Define a data structure for holding the calculations results.
-# 4. Define a class for computing the calculations given the readings data structure.
+# 4. Define a class for computing the calculations given the records data structure.
 class Calculations:  
-    def __init__ (self, records: ParseRecords):
-        self.record_list = records.record_list
+    def __init__ (self, records):
+        self.record_list = records
     
-    def max(self, index):
-        max_val = self.record_list[0].record[index]
-        for rec in self.record_list:
-            if rec.record[index] > max_val:
-                max_val = rec.record[index]
-        return max_val
+    def max_record(self, index):
+        return max(rec.reading[index] for rec in self.record_list)
 
-    def min(self, index):
-        min_val = self.record_list[0].record[index]
-        for rec in self.record_list:
-            if rec.record[index] < min_val:
-                min_val = rec.record[index]
-        return min_val
+    def min_record(self, index):
+        return min(rec.reading[index] for rec in self.record_list)    
     
-    def avg(self, index):
+    def avg_record(self, index):
         total = 0
         count = 0
         for record in self.record_list:
-            if len(record.record) > index:
-                total += record.record[index]
+            if len(record.reading) > index:
+                total += record.reading[index]
                 count += 1
         return total/count if count > 0 else 0
 
